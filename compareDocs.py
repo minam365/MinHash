@@ -1,36 +1,3 @@
-# ======== runMinHashExample =======
-# This example code demonstrates comparing documents using the MinHash
-# approach. 
-#
-# First, each document is represented by the set of shingles it contains. The
-# documents can then be compared using the Jaccard similarity of their 
-# shingle sets. This is computationally expensive, however, for large numbers
-# of documents. 
-#
-# For comparison, we will also use the MinHash algorithm to calculate short 
-# signature vectors to represent the documents. These MinHash signatures can 
-# then be compared quickly by counting the number of components in which the 
-# signatures agree. We'll compare all possible pairs of documents, and find 
-# the pairs with high similarity.
-#
-# The program follows these steps:
-# 1. Convert each test file into a set of shingles.
-#    - The shingles are formed by combining three consecutive words together.
-#    - Shingles are mapped to shingle IDs using the CRC32 hash.
-# 2. Calculate all Jaccard similarities directly.
-#    - This is ok for small dataset sizes. For the full 10,000 articles, it
-#      takes 20 minutes!
-# 3. Calculate the MinHash signature for each document.
-#    - The MinHash algorithm is implemented using the random hash function 
-#      trick which prevents us from having to explicitly compute random
-#      permutations of all of the shingle IDs. For further explanation, see
-#      section 3.3.5 of http://infolab.stanford.edu/~ullman/mmds/ch3.pdf
-# 4. Compare all MinHash signatures to one another.
-#    - Compare MinHash signatures by counting the number of components in which
-#      the signatures are equal. Divide the number of matching components by
-#      the signature length to get a similarity value.
-#    - Display pairs of documents / signatures with similarity greater than a
-#      threshold.
 
 from __future__ import division
 import os
@@ -48,7 +15,7 @@ numHashes = 10
 
 # You can run this code for different portions of the dataset.
 # It ships with data set sizes 100, 1000, 2500, and 10000.
-numDocs = 1000
+numDocs = 100
 dataFile = "./data/articles_" + str(numDocs) + ".train"
 truthFile = "./data/articles_" + str(numDocs) + ".truth"
 
